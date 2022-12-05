@@ -34,7 +34,29 @@ namespace Day_3
                 }
             }
 
+            return ToValue(duplicate);
+        }
+
+        private static int ToValue(char? duplicate)
+        {
             return duplicate < 'a' ? (int)duplicate - 38 : (int)duplicate! - 96;
+        }
+
+        internal int SumOfBadgePriorities()
+        {
+            var result = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (i % 3 != 0)
+                    continue;
+                foreach (var letter in input[i].Distinct())
+                {
+                    if (input[i].Contains(letter) && input[i + 1].Contains(letter) && input[i + 2].Contains(letter))
+                        result += ToValue(letter);
+                }
+            }
+
+            return result;
         }
     }
 }
